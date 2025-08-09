@@ -1,4 +1,5 @@
 import express, { Request, Response, urlencoded } from "express";
+import bodyParser from "body-parser";
 import project from "./routes/project.routes";
 import connectDatbase from "./config/connectDatbase.config";
 import blog from "./routes/blog.routes";
@@ -14,10 +15,12 @@ connectDatbase(DB_URI);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.use("/api/project", project);
 app.use("/api/blog", blog);
-app.use("/api/random", random),
-  app.listen(PORT, () => {
-    console.log(`server running at http//localhost:${PORT}`);
-  });
+app.use("/api/random", random);
+
+app.listen(PORT, () => {
+  console.log(`server running at http//localhost:${PORT}`);
+});

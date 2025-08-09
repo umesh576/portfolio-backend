@@ -10,10 +10,8 @@ const randomSchema = new mongoose.Schema(
     },
     photo: [
       {
-        required: [true, "techStack is required necessary"],
-        trim: true,
-        type: mongoose.Types.ObjectId,
-        ref: "techstack",
+        required: false,
+        type: String,
       },
     ],
   },
