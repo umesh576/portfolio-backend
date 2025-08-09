@@ -2,6 +2,7 @@ import express, { Request, Response, urlencoded } from "express";
 import project from "./routes/project.routes";
 import connectDatbase from "./config/connectDatbase.config";
 import blog from "./routes/blog.routes";
+import random from "./routes/random.routes";
 import "dotenv/config";
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 
 app.use("/api/project", project);
 app.use("/api/blog", blog);
-
-app.listen(PORT, () => {
-  console.log(`server running at http//localhost:${PORT}`);
-});
+app.use("/api/random", random),
+  app.listen(PORT, () => {
+    console.log(`server running at http//localhost:${PORT}`);
+  });
