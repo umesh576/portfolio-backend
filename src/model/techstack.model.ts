@@ -13,6 +13,11 @@ const techstackSchema = new mongoose.Schema(
       trim: true,
       minLength: [10, "Provide more description."],
     },
+    techStackProfile: {
+      required: [true, "tecjStackProfile is required."],
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
