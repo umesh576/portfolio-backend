@@ -15,15 +15,15 @@ export const addProject = async (req: Request, res: Response) => {
     //   picturePaths = files.projectPicture.map((file) => file.path);
     // }
     body.projectPicture = file;
-    console.log(file);
+    // console.log(file);
     const newProject = await Project.create(body);
-    body.useLanguage.map(
-      async (language: mongoose.Types.ObjectId, index: any) => {
-        const techStack = await TechStack.findById(language);
-        techStack?.project.push(newProject._id);
-        await techStack?.save();
-      }
-    );
+    // body.useLanguage.map(
+    //   async (language: mongoose.Types.ObjectId, index: any) => {
+    //     const techStack = await TechStack.findById(language);
+    //     techStack?.project.push(newProject._id);
+    //     await techStack?.save();
+    //   }
+    // );
 
     res.status(200).json({
       status: "success",

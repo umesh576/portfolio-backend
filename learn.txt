@@ -1,1 +1,23 @@
 npm install --save-dev typescript ts-node ts-node-dev @types/node
+
+
+cloudinary 
+// Configure Multer storage for Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'YOUR_FOLDER_NAME',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp']
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Route to handle multiple uploads
+app.post('/upload-multiple', upload.array('images', 10), (req, res) => {
+  // req.files contains array of uploaded files info
+  res.json({
+    message: 'Files uploaded successfully',
+    files: req.files
+  });
+});

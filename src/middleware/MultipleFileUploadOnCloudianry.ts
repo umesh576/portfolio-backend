@@ -10,11 +10,6 @@ declare module "multer-storage-cloudinary" {
     public_id?: any;
   }
 }
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 const storage = new CloudinaryStorage({
   cloudinary,
@@ -26,9 +21,5 @@ const storage = new CloudinaryStorage({
   } as Options["params"],
 });
 
-const cloudinaryFileUploader = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
-});
-
-export default cloudinaryFileUploader;
+const upload = multer({ storage, limits: { fileSize: 5.1024 * 1024 } });
+export default upload;
