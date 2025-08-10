@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import project from "./routes/project.routes";
 import connectDatbase from "./config/connectDatbase.config";
 import blog from "./routes/blog.routes";
+import techStack from "./routes/techstack.routes";
 import random from "./routes/random.routes";
 import "dotenv/config";
 
@@ -19,6 +20,8 @@ app.use(bodyParser.json());
 
 app.use("/api/project", project);
 app.use("/api/blog", blog);
+app.use("api/tech-stack", techStack);
+
 app.use("/api/random", random);
 
 app.listen(PORT, () => {

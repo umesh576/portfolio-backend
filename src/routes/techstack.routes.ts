@@ -1,14 +1,13 @@
 import { Router } from "express";
 import { addTechStack } from "../controller/techStack.controller";
-import uploadOncloudinary from "../config/cloudinary.config";
 import cloudinaryFileUploader from "../middleware/FileUploader";
 
-const server = Router();
+const router = Router();
 
-server.post(
+router.post(
   "/add-techstack",
   cloudinaryFileUploader.single("techStackProfile"),
   addTechStack
 );
 
-export default server;
+export default router;

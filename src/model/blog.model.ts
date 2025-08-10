@@ -14,6 +14,11 @@ const blogSchema = new mongoose.Schema(
         required: [true, "Content must be type of string."],
       },
     ],
+    blogImage: [
+      {
+        type: String,
+      },
+    ],
     keyPoints: {
       type: String,
     },

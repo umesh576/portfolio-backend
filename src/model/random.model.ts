@@ -12,6 +12,7 @@ const randomSchema = new mongoose.Schema(
       {
         required: false,
         type: String,
+        publicId: String,
       },
     ],
   },
