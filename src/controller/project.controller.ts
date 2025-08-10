@@ -6,25 +6,38 @@ import Project from "../model/project.model";
 export const addProject = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-    const file = req.files;
-    // const files = req.files as { projectPicture?: Express.Multer.File[] };
+    // const files = req.files as {
+    //   map(arg0: (file: any) => { url: any; publicId: any }): unknown;
+    //   projectPicture?: Express.Multer.File[];
+    // };
+    // console.log("Uploaded files:", req.files)` ;
+    const picturePaths = req.files
+      ? (req.files as Express.Multer.File[]).map((file) => file.path)
+      : [];
+    if (!body.projectName || !body.description) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Project name and description are required",
+      });
+    }
 
-    // let picturePaths: string[] = [];
+    // Handle file uploads - IMPORTANT FIX HERE
 
-    // if (files?.projectPicture && files.projectPicture.length > 0) {
-    //   picturePaths = files.projectPicture.map((file) => file.path);
-    // }
-    body.projectPicture = file;
-    // console.log(file);
-    const newProject = await Project.create(body);
-    // body.useLanguage.map(
-    //   async (language: mongoose.Types.ObjectId, index: any) => {
-    //     const techStack = await TechStack.findById(language);
-    //     techStack?.project.push(newProject._id);
-    //     await techStack?.save();
-    //   }
-    // );
-
+    // Create project with picture URLs
+    const newProject = await Project.create({
+      ...body,
+      projectPicture: picturePaths, // Ensure this matches your schema
+    });
+    // const pictureUrls =
+    //   files?.map((file: any) => ({
+    //     url: file.path,
+    //     publicId: file.filename, // Cloudinary public_id
+    //   })) || [];
+    // body.projectPicture = picturePaths;
+    // const newProject = await Project.create({
+    //   ...body,
+    //   projectPictures: pictureUrls,
+    // });
     res.status(200).json({
       status: "success",
       statusCode: 200,

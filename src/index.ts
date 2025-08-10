@@ -16,12 +16,6 @@ const DB_URI = process.env.DB_URI || "";
 
 connectDatbase(DB_URI);
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
