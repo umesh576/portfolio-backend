@@ -4,24 +4,36 @@ import TechStack from "../model/techstack.model";
 
 export const addTechStack = async (req: Request, res: Response) => {
   try {
-    console.log("umehs");
+    // Create tech stack data
     const body = req.body;
-    body.techStackProfile = req.file ? req.file.path : null;
-    if (!body.techStackName || !body.description) {
-      throw new CustomError("All details are nedded.", 404);
-    }
+    const file = req.file?.path[0];
+    body.techStackProfile = file;
 
+    // Create and save to database
     const newTech = await TechStack.create(body);
-    res.status(200).json({
+
+    // Successful response
+    return res.status(201).json({
       success: true,
       statusCode: 200,
-      message: "New techstack added sucessfully.",
+      message: "Tech stack added successfully",
       data: newTech,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false, // Fixed typo
-      message: "Tech stack cannot created.",
+  } catch (error: any) {
+    console.error(error); // Always log for debugging
+
+    if (error instanceof CustomError) {
+      return res.status(error.statusCode).json({
+        success: error.success,
+        status: error.status,
+        message: error.message,
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      status: "error",
+      message: error.message || "Internal server error",
     });
   }
 };

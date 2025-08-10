@@ -3,25 +3,29 @@ import mongoose from "mongoose";
 const techstackSchema = new mongoose.Schema(
   {
     techStackName: {
-      required: [true, "TechStack name is required"],
       type: String,
+      required: [true, "TechStack name is required"],
       trim: true,
     },
     description: {
-      required: [true, "Description is needed."],
       type: String,
+      required: [true, "Description is needed."],
       trim: true,
-      minLength: [10, "Provide more description."],
+      minLength: [10, "Description must be at least 10 characters"],
     },
     techStackProfile: {
-      required: [true, "tecjStackProfile is required."],
       type: String,
-      trim: true,
+      default: null, // Make it optional
     },
+    project: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "project",
+      },
+    ],
   },
   { timestamps: true }
 );
-
 const TechStack = mongoose.model("techstack", techstackSchema);
 
 export default TechStack;

@@ -8,7 +8,7 @@ const projectSchema = new mongoose.Schema(
       trim: true,
       minLength: [3, "Name is must more than 3 letter."],
     },
-    techStack: [
+    useLanguage: [
       {
         required: [true, "techStack is required necessary"],
         trim: true,
@@ -16,6 +16,7 @@ const projectSchema = new mongoose.Schema(
         ref: "techstack",
       },
     ],
+
     description: {
       required: [true, "Description is required"],
       type: String,
@@ -28,6 +29,11 @@ const projectSchema = new mongoose.Schema(
       required: [true, "Provide date is neccessary."],
       type: Date,
     },
+    projectPicture: [
+      {
+        type: String,
+      },
+    ],
     keyPoints: {
       type: String,
       trim: true,
