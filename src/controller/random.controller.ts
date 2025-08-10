@@ -14,8 +14,6 @@ export const createRandom = async (req: Request, res: Response) => {
       data: random,
     });
   } catch (error) {
-    // Added error parameter
-    console.error(error);
     res.status(500).json({
       success: false, // Fixed typo
       message: "not created random",
