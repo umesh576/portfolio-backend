@@ -106,7 +106,7 @@ export const updateTechStack = async (req: Request, res: Response) => {
       status: "success",
       statusCode: 200,
       success: true,
-      message: "Language is update sucessfully.",
+      message: "Language is  update sucessfully.",
       data: techStack,
     });
   } catch (error: any) {
