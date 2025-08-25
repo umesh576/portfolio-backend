@@ -27,8 +27,6 @@ app.use("/api/random", random);
 
 // Global error handling middleware
 app.use((err: any, req: Request, res: Response, next: Function) => {
-  console.error("GLOBAL ERROR HANDLER:", err);
-
   if (err instanceof CustomError) {
     return res.status(err.statusCode).json({
       success: err.success,
